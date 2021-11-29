@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#SBATCH --nodes=8
+#SBATCH --ntasks-per-node=16
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=3GB
+#SBATCH --time=20:00:00
+#SBATCH --partition=epyc-64   
+#SBATCH --account=dconti_624     # Need to change to appropriate account
+#SBATCH --mail-type=end          # optional, send email when job ends
+#SBATCH --mail-user=your_email@usc.edu # email address if desired
+
+module purge
+module load gcc/11.2.0
+module load openblas/0.3.18
+module load jags
+module load openmpi
+module load pmix
+module load r/4.1.2
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+srun --mpi=pmix_v2 -n $SLURM_NTASKS Rscript --vanilla example_r_code.R
