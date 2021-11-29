@@ -5,8 +5,7 @@
 ssh jagoodri@discovery.usc.edu
 
 # Change Working Directory
-cd /project/dconti_624/Users/jagoodri/sol
-
+cd /project/dconti_624/Users/jagoodri/example_jags_lin_mod
 
 # Run analysis
 dos2unix example_slurm_job_script.job
