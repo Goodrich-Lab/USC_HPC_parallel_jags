@@ -14,4 +14,5 @@ The basics of running this analysis are as follows:
 
 1) Set up the HPC cluster to run the analysis, using the "Shell commands for setting up HPC prior to analysis.sh". This includes installing R2jags.  
 2) Upload slurm_job_script.job and r script to the HPC. The easiest way to do this is to use the CARC on-demand interface (https://www.carc.usc.edu/user-information/user-guides/hpc-basics/getting-started-ondemand). 
-3) Use "Shell commands for HPC analysis.sh" to submit job. 
+3) Use the code from "Shell commands for HPC analysis.sh" to submit job. 
+4) Troubleshoot errors generated during stages 1-3. Rinse and repeat. 
