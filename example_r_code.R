@@ -14,7 +14,6 @@ setwd("/project/dconti_624/Users/jagoodri/example_jags_lin_mod")
 
 # create simulated data -------------------------------------------------------
 
-
 N <- 1000
 alpha <- 2
 beta <- 4
@@ -54,12 +53,24 @@ jags_lin_mod <- function(N, Y, X){
                             thin=1, 
                             progress.bar="none")
   
+  # Get Summary
   r <- summary(model.fit)
-  
+  # Change Col Names
   colnames(r$statistics) <- c("Mean", "SD", "Naive_SE", "Time_series_SE")
+  # Change to data frame
+  results <- as.data.frame(r$statistics)
+  # Rownames to column 
+  results$variable <- rownames(results)
+  # Remove rownames
+  rownames(results) <- NULL
+  # Reorder
+  results <- dplyr::select(results, variable, dplyr::everything())
   
-  return(r$statistics)
+  return(results)
 }
+
+
+
 
 # create function to run iterations of the function created above --------------
 # This can also be used to iterate across different columns in a data frame
@@ -89,3 +100,10 @@ message(paste("SUCCESS from rank", comm.rank()))
 
 # End connections
 finalize(mpi.finalize = TRUE)
+
+# I have run into an issue where the finalize function does not always 
+# close the connection, so the job will run  until it is terminated by the 
+# Slurm scheduler, even if it is completed. Therefore, I have included this final 
+# line of code. This line throws an error, but will also kill the slurm job without 
+# wasting resources (please email me at jagoodri@usc.edu if you find a solution to this)
+slurmR::Slurm_clean(coefs)
