@@ -2,7 +2,7 @@
 #############################################################
 # Commands for troubleshooting and testing ------------------
 
-# Log ig
+# Log in
 ssh jagoodri@endeavour.usc.edu
 
 

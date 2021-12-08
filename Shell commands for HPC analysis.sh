@@ -1,7 +1,7 @@
 # Log in to HPC 
 # Performed analysis on the epyc-64	partition on Discovery
 
-# Log ig
+# Log in
 ssh jagoodri@discovery.usc.edu
 
 # Change Working Directory
